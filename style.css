@@ -1,6 +1,4 @@
-body{
-	background: #151515;
-}
+body{ background: #151515;}
 #window{
 	background-color: #313131;
 	border-color: #000;
@@ -85,9 +83,7 @@ body{
 	transition: background-color 300ms;
 	width: 2px;
 }
-.close::after{
-	transform: translateX(-50%) rotateZ(45deg);
-}
+.close::after{ transform: translateX(-50%) rotateZ(45deg);}
 .close:hover, .hide:hover{cursor: pointer;}
 .close:hover::before, .close:hover::after, .hide:hover::before, .hide:hover::after{background-color: red;}
 .body{overflow: auto;}

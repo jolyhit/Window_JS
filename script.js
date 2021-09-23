@@ -24,6 +24,9 @@ function createWindow() {
 	hide.onclick = HideWindow
 	document.body.append(mainWindow)
 	windowVis = true
+	let win = this.parentElement
+	let bound = win.getBoundingClientRect()
+	coordinates = bound
 }
 
 function onMouseDown(e) {
@@ -49,16 +52,12 @@ function onMouseMove(e) {
 	win.style.left = '' + (bound.left + (e.clientX - +this.dataset.x)) + 'px'
 	this.dataset.x = e.clientX
 	this.dataset.y = e.clientY
-	let window = e.target.closest('#window')
-	let coord = window.getBoundingClientRect()
-	coordinates = coord
+	coordinates = bound
 }
 
 function CloseWindow(e) {
 	let window = e.target.closest('#window')
-	if (window) {
-		window.remove()
-	}
+	if (window) window.remove()
 }
 
 function HideWindow(e) {
