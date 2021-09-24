@@ -1,25 +1,45 @@
-body{ background: #151515;}
-#window{
-	background-color: #313131;
-	border-color: #000;
-	border-radius: 10px;
-	border-style: inset;
-	border-width: 2px;
-	height: 450px;
-	position: fixed;
-	width: 350px;
-}
-#head{
-	background-color: #2EE59D66;
-	border-radius: 10px 10px 0 0;
-	color: #E3E1E1;
+*{
+	box-sizing: border-box;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	padding: 10px;
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #131313;
+}
+.window{
+	background-color: #343434;
+	border: 1px solid #335024;
+	border-radius: 11px;
+	position: fixed;
+	width: 270px;
+}
+.window:not(.top) > .head{
+	background-color: rgba(64, 106, 47, 0.4);
+	color: #101010;
+}
+.window:not(.top){
+	background-color: rgba(54, 54, 54, 0.4);
+}
+.window.hidden{
+	position: static;
+}
+.window.hidden > .body{
+	display: none;
+}
+.head{
+	background-color: #499929;
+	border-radius: 11px 11px 0 0;
+	color: #DED6D6;
+	padding: 4px 30px 4px 10px;
 	position: relative;
 	user-select: none;
 }
-#head:hover{cursor: grab;}
-#head:active{cursor: grabbing;}
+.window:active{
+	box-shadow: 0 0 20px rgba(36, 205, 142, 0.4);
+}
+.head:hover{cursor: grab;}
+.head:active{cursor: grabbing;}
 .createBtn{
 	background: #D4D4D4;
 	border-radius: 45px;
@@ -38,7 +58,10 @@ body{ background: #151515;}
 	text-transform: uppercase;
 	transition: .3s;
 	user-select: none;
-	width: 140px;
+	width: 125px;
+}
+.body{
+	min-height: 260px;
 }
 .createBtn:hover{
 	background: #2EE59D;
@@ -86,4 +109,21 @@ body{ background: #151515;}
 .close::after{ transform: translateX(-50%) rotateZ(45deg);}
 .close:hover, .hide:hover{cursor: pointer;}
 .close:hover::before, .close:hover::after, .hide:hover::before, .hide:hover::after{background-color: red;}
-.body{overflow: auto;}
+.hidden-container{
+	bottom: 2px;
+	display: flex;
+	flex-direction: column-reverse;
+	flex-wrap: wrap;
+	left: 2px;
+	position: fixed;
+}
+.hidden-container > .window{
+	border-radius: 12px;
+	box-shadow: none;
+	margin: 1px;
+}
+.hidden-container > .window > .head{
+	background-color: rgba(130, 53, 161, 0.6);
+	border-radius: 12px;
+	color: #DED6D6;
+}
