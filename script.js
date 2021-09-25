@@ -2,21 +2,26 @@ let createBtn = document.querySelector(".createBtn")
 if (createBtn) createBtn.onclick = createWindow
 let zIndex = 1
 let windowCount = 1
+let maximize = 1
 
 function createWindow() {
 	let mainWindow = document.createElement('div'), head = document.createElement('div'), body = document.createElement('div'),
-		headText = document.createElement('div'), close = document.createElement('div'), hide = document.createElement('div')
+		headText = document.createElement('div'), close = document.createElement('div'), hide = document.createElement('div'),
+		maximize = document.createElement('div')
 	mainWindow.append(head, body)
-	head.append(headText, hide, close)
+	head.append(headText, hide, maximize, close)
 	head.onmousedown = onMouseDown
 	head.onmouseup = onMouseUp
 	head.onmousemove = onMouseMove
 	headText.textContent = 'Window №' + windowCount++
 	mainWindow.className = 'window'
+	maximize.className = 'maximize'
 	head.className = 'head'
 	body.className = 'body'
 	close.className = 'close'
 	hide.className = 'hide'
+	maximize.onclick = maximizeWindow
+	head.ondblclick = maximizeWindow
 	close.onclick = closeWindow
 	hide.onclick = hideWindow
 	mainWindow.onmousedown = topWind
@@ -34,10 +39,9 @@ function topWind() {
 }
 
 function onMouseDown(e) {
-	if (this.closest('.window.hidden')) return
-	this.dataset.isMove = true
-	this.dataset.x = '' + e.clientX.y
-	this.dataset.y = '' + e.clientX.x
+	let window = this.closest('.window')
+	if (this.closest('.window.hidden') || window.dataset.maximize == 1 || window.classList.contains('hidden')) return
+	this.dataset.isMove = 'true'
 }
 
 function onMouseUp() {
@@ -81,7 +85,37 @@ function hideWindow() {
 	window.classList.add('hidden')
 	document.body.append(hiddenContainer)
 	hiddenContainer.append(window)
+}
+function resizeWindow(){
 
+}
+function maximizeWindow() {
+	let window = this.closest('.window')
+	if (!window) return
+	if (window){
+		if (window.dataset.maximize === '1'){
+			window.dataset.maximize = 0
+			window.style.left =  window.dataset.left + 'px'
+			window.style.top =  window.dataset.top + 'px'
+			window.style.height =  window.dataset.height + 'px'
+			window.style.width =  window.dataset.width + 'px'
+			window.style.right = null
+			window.style.bottom = null
+		}else{
+			let bound = window.getBoundingClientRect()
+			window.dataset.width = '' + bound.width
+			window.dataset.height = '' + bound.height
+			window.dataset.left = '' + bound.left
+			window.dataset.top = '' + bound.top
+			window.style.left = '0px'
+			window.style.right = '0px'
+			window.style.top = '0px'
+			window.style.bottom = '0px'
+			window.style.width = 'auto'
+			window.style.height = 'auto'
+			window.dataset.maximize = '1'
+		}
+	}
 }
 
 

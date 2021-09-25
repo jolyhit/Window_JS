@@ -10,7 +10,7 @@ body{
 .window{
 	background-color: #343434;
 	border: 1px solid #335024;
-	border-radius: 11px;
+	border-radius: 9px;
 	position: fixed;
 	width: 270px;
 }
@@ -20,6 +20,7 @@ body{
 }
 .window:not(.top){
 	background-color: rgba(54, 54, 54, 0.4);
+	border: none;
 }
 .window.hidden{
 	position: static;
@@ -29,7 +30,7 @@ body{
 }
 .head{
 	background-color: #499929;
-	border-radius: 11px 11px 0 0;
+	border-radius: 9px 9px 0 0;
 	color: #DED6D6;
 	padding: 4px 30px 4px 10px;
 	position: relative;
@@ -70,20 +71,29 @@ body{
 	transform: translateY(-7px);
 }
 .close{
-	display: block;
+	display: flow;
 	height: 20px;
 	position: absolute;
 	right: 5px;
 	top: 50%;
 	transform: translateY(-50%);
 	width: 20px;
+
 }
 .hide{
 	display: block;
 	height: 15px;
 	position: absolute;
-	right: 40px;
+	right: 60px;
 	top: 45%;
+	transform: rotate(90deg);
+}
+.maximize{
+	display: inline-block;
+	position: absolute;
+	top: 45%;
+	height: 15px;
+	right: 40px;
 	transform: rotate(90deg);
 }
 .close::before, .close::after{
@@ -97,7 +107,7 @@ body{
 	transition: background-color 300ms;
 	width: 2px;
 }
-.hide::before, .hide::after{
+.hide::before, .hide::after, .maximize::before, .maximize::after{
 	background-color: #FFF;
 	content: '';
 	height: 100%;
@@ -107,8 +117,8 @@ body{
 	width: 2px;
 }
 .close::after{ transform: translateX(-50%) rotateZ(45deg);}
-.close:hover, .hide:hover{cursor: pointer;}
-.close:hover::before, .close:hover::after, .hide:hover::before, .hide:hover::after{background-color: red;}
+.close:hover, .hide:hover, .maximize:hover{cursor: pointer;}
+.close:hover::before, .close:hover::after, .hide:hover::before, .hide:hover::after, .maximize:hover::after, .maximize:hover::before{background-color: red;}
 .hidden-container{
 	bottom: 2px;
 	display: flex;
